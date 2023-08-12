@@ -166,7 +166,6 @@ function availableMoves(board) {
 }
 
 //AI
-//minimax algorithm - explanation here: http://http://neverstopbuilding.com/minimax
 function miniMax(state, player) {
   //base cases: check for an end state and if met - return the score from the perspective of the AI player.  
   var rv = checkVictory(state);
@@ -182,7 +181,6 @@ function miniMax(state, player) {
 
   var moves = [];
   var scores = [];
-  //for each of the available squares: recursively make moves and push the score + accompanying move to the moves + scores array
   availableMoves(state).forEach(function(square) {
     state[square] = (player === 'aiPlayer') ? 1 : -1;
     scores.push(miniMax(state, (player === 'aiPlayer') ? 'opponent' : 'aiPlayer'));
@@ -190,7 +188,6 @@ function miniMax(state, player) {
     state[square] = 0;
   });
 
-  //calculate and return the best score gathered from each of the available moves. track the best movein the AIMove variable
 
   if (player === 'aiPlayer') {
     AIMove = moves[scores.indexOf(Math.max.apply(Math, scores))];
